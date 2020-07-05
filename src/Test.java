@@ -37,7 +37,6 @@ public class Test {
 
                 vms.campaigns.add(new Campaign(name, description, id, budget, startDate, endDate));
 
-
             }
             s.close();
 
@@ -129,12 +128,17 @@ public class Test {
                             vms.updateCampaign(campaignId, camp);
 
                             ArrayList<User> usersInThisCampaign = vms.getCampaign(campaignId).getObservers();
-                            for (User i : usersInThisCampaign){
-                                Notification notification = new Notification(
-                                        campaignId, curentDateEvents, Notification.NotificationType.EDIT);
-                                notification.setVouchersCode(i.getVouchersCodeInCampaign(campaignId));
-                                i.addNotifications(notification);
-                            }
+
+                            Notification notification = new Notification(campaignId, curentDateEvents, Notification.NotificationType.EDIT);
+
+                            camp.notifyAllObservers(notification);
+
+//                            for (User i : usersInThisCampaign){
+//                                Notification notification = new Notification(
+//                                        campaignId, curentDateEvents, Notification.NotificationType.EDIT);
+//                                notification.setVouchersCode(i.getVouchersCodeInCampaign(campaignId));
+//                                i.addNotifications(notification);
+//                            }
                         }
                         break;
 
@@ -163,7 +167,7 @@ public class Test {
                         voucherType = s.next();
                         value = Float.parseFloat(s.next());
 
-                        //functia pentru bonus - trebuie decomentata ca sa functioneze
+
 /*
                         File emailFile = new File(
                                 "/home/adrian/Documents/labPOO/VoucherManagementService/src/teste//emails.txt");

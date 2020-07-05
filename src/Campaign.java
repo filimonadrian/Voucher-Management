@@ -171,6 +171,7 @@ public class Campaign {
         for (int i = 0; i < observers.size(); i++){
             if (observers.get(i).getEmail().equals(user.getEmail())){
                 observers.remove(i);
+                break;
             }
         }
     }
